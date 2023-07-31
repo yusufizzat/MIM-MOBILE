@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         backgroundColor : colors.white,
     },
     text : {
-        fontFamily : fonts.PoppinsRegular,
+        fontFamily : "Regular",
         fontSize : dimens.xxl,
         color : colors.black,
     },

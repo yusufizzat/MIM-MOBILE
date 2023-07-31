@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native';
 import { colors, dimens } from '../../utils';
-import { fonts, images } from '../../assets';
+import {  images } from '../../assets';
 
-const Splash = ({ navigation, route }) => {
+const Splash = ({ navigation }) => {
 
+   
     useEffect(() => {
         const wait = ms => {
             return new Promise(resolve => {
@@ -14,7 +15,7 @@ const Splash = ({ navigation, route }) => {
         let mounted = true;
         if (mounted) {
             wait(3000).then(() => {
-                navigation.replace('MainNavigator');
+                navigation.replace('OnBoard');
             });
         }
         return () => {
@@ -25,9 +26,7 @@ const Splash = ({ navigation, route }) => {
         <SafeAreaView style = { styles.container }>
             <View style = { styles.body }>
                 <Image source = { images.logo } style = { styles.logo } />
-                <Text style = {[ styles.text, { fontSize : dimens.m }]}>
-                By : Pondok Programmer
-                </Text>
+                <Text style={styles.text}>Menghafal itu <Text style={styles.text2}>Mudah</Text></Text>
             </View>
         </SafeAreaView>
     );
@@ -42,18 +41,24 @@ const styles = StyleSheet.create({
         width : '100%',
         justifyContent : 'center',
         alignItems : 'center',
-        backgroundColor : colors.primary,
+        backgroundColor : colors.white,
     },
     logo : {
-        tintColor : colors.white,
+        tintColor: colors.secondary,
         height : 150,
         width : 150,
         resizeMode : 'contain',
     },
     text : {
-        fontFamily : fonts.PoppinsRegular,
-        fontSize : dimens.xxl,
-        color : colors.white,
+        marginTop: -45,
+        fontFamily : 'Medium',
+        fontSize : 17,
+        color : colors.primary,
+    },
+    text2 : {
+        fontFamily : 'Medium',
+        fontSize : 17,
+        color : colors.secondary,
     },
 });
 
