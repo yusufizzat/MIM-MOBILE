@@ -1,7 +1,7 @@
 import Register from "./Register"
 import Registerr from "./Registerr"
 import Registerrr from "./Registerrr"
-// import Registerrrr from "./Registerrrr"
+import Registerrrr from "./Registerrrr"
 
 
-export { Register,Registerr,Registerrr, }
+export { Register,Registerr,Registerrr,Registerrrr }

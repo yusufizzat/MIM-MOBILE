@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Image,Dimensions } from 'react-native'
+import { StyleSheet, Text, View,Image,Dimensions,StatusBar } from 'react-native'
 import React from 'react'
 import {  images } from '../../assets';
 import { colors, dimens } from '../../utils';
@@ -10,6 +10,7 @@ const OnBoard = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+         <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent/>    
          <View style={[StyleSheet.absoluteFillObject, styles.emptyHeaderContainer]}>
             </View>
       <View style={styles.body}>

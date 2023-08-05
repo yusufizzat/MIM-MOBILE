@@ -1,67 +1,48 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Home, Setting } from '../screens';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home, Setting,Quran } from '../screens';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors } from '../utils';
 import { GlobalContext } from '../Store/globalContext';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const MainNavigator = () => {
-
-	const globalContext = React.useContext(GlobalContext);
-	const dark = globalContext.state.isDark;
-
 	return (
 		<Tab.Navigator
-		initialRouteName = "Home"
-		activeColor = {colors.primary}
-		inactiveColor = "#95a5a6"
-		shifting = {false}
-		barStyle = {[
-			styles.barStyle,
-			{
-				backgroundColor : dark ? colors.black : colors.white,
-				borderTopWidth : dark ? 0.3 : 0,
-				borderRightWidth : dark ? 0.3 : 0,
-				borderLeftWidth : dark ? 0.3 : 0,
-				borderColor : colors.gray,
-			},
-		]}
-		style = {{ backgroundColor: dark ? colors.black : colors.white }}>
-		<Tab.Screen
-			name = "Home"
-			component = { Home }
-			options = {{
-				tabBarLabel : 'Home',
-				tabBarIcon : ({ color }) => (
-					<MaterialCommunityIcons name = "home" color = { color } size = { 26 } />
-				),
-			}}/>
-		<Tab.Screen
-			name = "Setting"
-			component = { Setting }
-			options = {{
-				tabBarLabel : 'Setting',
-				tabBarIcon : ({ color }) => (
-					<MaterialCommunityIcons name = "account" color = { color } size = { 26 } />
-				),
-			}}/>
-		</Tab.Navigator>
+		screenOptions={({route}) => ({
+		  headerShown: false,
+		  tabBarShowLabel: false,
+	
+		  tabBarStyle: {height: 60,position: 'relative'},
+	
+		  tabBarIcon: ({focused, size, color}) => {
+			let iconName;
+			if (route.name === 'Home') {
+			  iconName = focused ? 'home' : 'home-outline';
+			  color = colors.black;
+			  size =  size + 9
+			} else if (route.name === 'Setting') {
+			  iconName = focused ? 'account' : "account-outline";
+			  color = colors.black;
+			  size =  size + 9 
+			} else if (route.name === 'Quran') {
+				iconName = focused ? 'book' : "book-outline";
+				color = colors.black;
+				size =  size + 5 
+			  } 
+	
+			return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+		  },
+		})}>
+			  <Tab.Screen name="Home" component={Home}/>
+			  <Tab.Screen name="Quran" component={Quran}/>
+			  <Tab.Screen name="Setting" component={Setting}/>
+			</Tab.Navigator>
 	);
 }
 const styles = StyleSheet.create({
-	barStyle : {
-		backgroundColor : colors.white,
-		borderTopRightRadius : 30,
-		borderTopLeftRadius : 30,
-		paddingHorizontal : 8,
-		justifyContent : 'center',
-		height : 75,
-		borderColor : colors.lightGray,
-		width : '100%',
-		// position : 'absolute', //use if you want to absolute navbar
-	},
+
 });
 export default MainNavigator;

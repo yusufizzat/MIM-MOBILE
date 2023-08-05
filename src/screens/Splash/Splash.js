@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Image,StatusBar } from 'react-native';
 import { colors, dimens } from '../../utils';
 import {  images } from '../../assets';
 
@@ -24,6 +24,7 @@ const Splash = ({ navigation }) => {
     }, []);
     return (
         <SafeAreaView style = { styles.container }>
+               <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent/>    
             <View style = { styles.body }>
                 <Image source = { images.logo } style = { styles.logo } />
                 <Text style={styles.text}>Menghafal itu <Text style={styles.text2}>Mudah</Text></Text>

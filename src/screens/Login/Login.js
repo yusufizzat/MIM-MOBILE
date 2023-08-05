@@ -19,6 +19,7 @@ const Login = ({navigation}) => {
 
   const handler = () => {
     console.log(form);
+    navigation.replace('MainNavigator')
   }
   return (
     <>
@@ -49,8 +50,16 @@ const Login = ({navigation}) => {
                    value={form.pass}
             />
           </View>
-          <Text style={{fontFamily:'Light',color:colors.secondary,marginTop: 8}}>Lupa Password?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('FG')}>
+            <Text style={{fontFamily:'Light',color:colors.secondary,marginTop: 8}}>Lupa Password?</Text>
+          </TouchableOpacity>
           <ButtonCustom title={"Selanjutnya"} buttonStyle={styles.button} onPress={handler}/>
+          <View style={{justifyContent:'center',flexDirection:'row'}}>
+            <Text style={{color: 'black',fontFamily:'Light'}}>Belum Punya Akun?</Text>
+            <TouchableOpacity onPress={() => navigation.replace('Register')}>
+               <Text style={{color: '#1065C8',fontFamily:'Light'}}> Daftar!</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </>
@@ -102,5 +111,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 59,
     backgroundColor:colors.secondary,
+    marginBottom: 24
   }
 })

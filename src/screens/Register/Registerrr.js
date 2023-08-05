@@ -20,15 +20,12 @@ const Registerrr = ({navigation}) => {
 //       ...form,[input] : value
 //     })
 //   }
-  
-
-
   const handler = () => {
     console.log(form);
-
+    navigation.navigate('Registerrrr')
   }
   
-const pendidikann = [
+  const pendidikann = [
     { label: 'SD/Sederajat', value: 'SD' },
     { label: 'SMP/Sederajat', value: 'SMP' },
     { label: 'SMA/Sederajat', value: 'SMA' },
@@ -50,7 +47,7 @@ const pendidikann = [
     { label: 'Rp. 1.000.000 - Rp 2.500.000', value: 'Rp. 1.000.000 - Rp 2.500.000' },
     { label: 'Rp. 2.500.000 - Rp. 5.000.000', value: 'Rp. 2.500.000 - Rp. 5.000.000' },
     { label: "Rp 5.000.000 >", value: "Rp 5.000.000 >" },
-  ];
+  ]
   const [selectedValue,setSelectedValue] = useState('')
   const handleSelect = (value,input) => {
     setForm({

@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View,Image,StatusBar,Dimensions,TextInput, TouchableOpacity,Platform,DatePickerAndroid} from 'react-native'
+import { StyleSheet, Text, View,Image,StatusBar,Dimensions,TextInput, TouchableOpacity,Platform,DatePickerAndroid,Modal} from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview'
-
+import DatePicker from 'react-native-date-picker'
 import React, { useEffect,useState } from 'react'
 import {  images,icons } from '../../assets';
 import { colors } from '../../utils';
@@ -14,7 +14,7 @@ const Registerr = ({navigation}) => {
     tanggalLahir: ''
   })
   const [date,setDate] = useState(new Date())
-  const [showPicker, setShowPicker] = useState(false)
+  const [open, setOpen] = useState(false)
   const handleForm = (value,input) => {
     setForm({
       ...form,[input] : value
@@ -30,6 +30,11 @@ const Registerr = ({navigation}) => {
   const handleJenisKelamin = (jenis) => {
     setJenisKelamin(jenis);
 
+  };
+  const handleDateChange = (selectedDate) => {
+    setOpen(false); // Close the DatePicker modal
+    setDate(selectedDate); // Set the selected date to the state
+    handleForm(selectedDate.toISOString().slice(0, 10), 'tanggalLahir'); // Convert date to string and update the 'tanggalLahir' field in the form state
   };
   
   return (
@@ -68,10 +73,17 @@ const Registerr = ({navigation}) => {
             <View style={{alignItems:'center',marginBottom: 13}}>
 
               <Text style={styles.ti}>Tanggal Lahir</Text>
-              <TextInput placeholder='Atur Tanggal Lahirmu' style={styles.input}
-                    onChangeText={(value) => handleForm(value,'tanggalLahir')}  
-                    value={form.tanggalLahir}
-              />
+              <TouchableOpacity onPress={() => setOpen(true)}>
+                {/* Use the selected date in the TextInput */}
+                <TextInput
+                  placeholder="Atur Tanggal Lahirmu"
+                  style={styles.input}
+                  onChangeText={(value) => handleForm(value, 'tanggalLahir')}
+                  value={form.tanggalLahir}
+                  editable={false} // Disable direct editing of the TextInput
+                />
+              </TouchableOpacity>
+         
             </View>
             <View>
             <Text style={styles.ti}>Jenis Kelamin</Text>
@@ -92,6 +104,18 @@ const Registerr = ({navigation}) => {
           </View>
         </View>
       </KeyboardAwareScrollView>
+            <DatePicker
+              modal
+              open={open}
+              date={date}
+              onConfirm={(date) => {
+                handleDateChange(date)
+              }}
+              onCancel={() => {
+                setOpen(false)
+              }}
+              mode={'date'}
+            />
     </>
   )
 }
